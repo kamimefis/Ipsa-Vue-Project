@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useInstrumentStore } from '../stores/instrument.js'
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
@@ -7,6 +7,13 @@ import Column from 'primevue/column';
 const store = useInstrumentStore();
 store.loadData();
 const constituents = store.constituents
+
+// Computed para filtrar filas basado en `globalID`, pero mostrando todo si es "IPSA"
+// const filteredConstituents = computed(() => {
+//   const globalID = store.globalID;
+//   if (globalID === "IPSA") return constituents;
+//   return constituents.filter((row) => row.name === globalID);
+// });
 
 const colorValue = (value) => value > 0 ? "positive" : value < 0 ? "negative" : "neutral";
 
