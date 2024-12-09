@@ -8,7 +8,7 @@ import SearchBarComponent from './components/SearchBarComponent.vue';
 
 <template>
   <SearchBarComponent/>
-  <!-- <ChartComponent /> -->
+  <ChartComponent />
   <DatatableComponent />
 </template>
 
