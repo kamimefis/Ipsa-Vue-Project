@@ -9,6 +9,14 @@ import historyBCI from '../json/json-VueJS/history/history-BCI.json';
 import historyANDINA from '../json/json-VueJS/history/history-ANDINA-B.json';
 import historyAGUAS from '../json/json-VueJS/history/history-AGUAS-A.json';
 
+//Summary:
+import summaryIPSA from '../json/json-VueJS/resumen/IPSA.json';
+import summaryCAP from '../json/json-VueJS/resumen/CAP.json';
+import summaryBSANTANDER from '../json/json-VueJS/resumen/BSANTANDER.json';
+import summaryBCI from '../json/json-VueJS/resumen/BCI.json';
+import summaryANDINA from '../json/json-VueJS/resumen/ANDINA-B.json';
+import summaryAGUAS from '../json/json-VueJS/resumen/AGUAS-A.json';
+
 export const useInstrumentStore = defineStore('instrument', {
   state: () => ({
     constituents: [],
@@ -18,11 +26,20 @@ export const useInstrumentStore = defineStore('instrument', {
       CAP: historyCAP.data.chart,
       BSANTANDER: historyBSANTANDER.data.chart,
       BCI: historyBCI.data.chart,
-      "ANDINA-A": historyANDINA.data.chart,
-      "AGUAS-B": historyAGUAS.data.chart,
+      "ANDINA-B": historyANDINA.data.chart,
+      "AGUAS-A": historyAGUAS.data.chart,
     },
 
     globalID: "IPSA",
+
+    summary: {
+      IPSA: summaryIPSA.data,
+      CAP: summaryCAP.data,
+      BSANTANDER: summaryBSANTANDER.data,
+      BCI: summaryBCI.data,
+      "ANDINA-B": summaryANDINA.data,
+      "AGUAS-A": summaryAGUAS.data,
+    },
   }),
   getters: {
 
