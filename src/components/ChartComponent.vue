@@ -29,10 +29,10 @@ const filterHistoricData = (periodInDays, historicArray) => {
 
 const whichHistoryArrayToUse = computed(() => {
   switch (store.globalID) {
-    case 'ANDINA-A':
-      return store.histories['ANDINA-A'];
-    case 'AGUAS-B':
-      return store.histories['AGUAS-B'];
+    case 'ANDINA-B':
+      return store.histories['ANDINA-B'];
+    case 'AGUAS-A':
+      return store.histories['AGUAS-A'];
     case 'BCI':
       return store.histories.BCI;
     case 'BSANTANDER':
@@ -110,7 +110,7 @@ const chartOptions = {
     <div class="info-error" v-if="filteredData.length === 0">
       <p class="color= white">No hay datos disponibles para el período seleccionado</p>
     </div>
-    <Chart type="line" :data="lineChartData" :options="chartOptions" :height=90 />
+    <Chart type="line" :data="lineChartData" :options="chartOptions" class="responsive-chart" />
 
     <div class="period-buttons">
       <button v-for="(days, period) in INSTRUMENT_PERIODS" :key="period" @click="selectedPeriod = period"
@@ -153,5 +153,22 @@ const chartOptions = {
 .period-buttons button.active {
   background-color: #007ad9;
   color: black;
+}
+
+.responsive-chart {
+  width: 100%; 
+  height: 300px;
+}
+
+@media (max-width: 768px) {
+  .responsive-chart {
+    height: 300px; 
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-chart {
+    height: 200px;
+  }
 }
 </style>
