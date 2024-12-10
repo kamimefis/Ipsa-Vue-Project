@@ -3,26 +3,41 @@ import { ref, computed } from 'vue';
 import { useInstrumentStore } from '../stores/instrument.js'
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
+import Divider from 'primevue/divider';
 
 const store = useInstrumentStore();
 store.loadData();
 const constituents = store.constituents
 
-// Computed para filtrar filas basado en `globalID`, pero mostrando todo si es "IPSA"
+//Computed para filtrar filas basado en `globalID`, pero mostrando todo si es "IPSA"
 // const filteredConstituents = computed(() => {
-//   const globalID = store.globalID;
-//   if (globalID === "IPSA") return constituents;
-//   return constituents.filter((row) => row.name === globalID);
+//     const globalID = store.globalID;
+//     if (globalID === "IPSA") return constituents;
+//     return constituents.filter((row) => row.name === globalID);
 // });
 
 const colorValue = (value) => value > 0 ? "positive" : value < 0 ? "negative" : "neutral";
 
+const clickOnRow = (event) => {
+    // console.log("you click on me",event.data.name );
+    const validIDs = ["IPSA", "AGUAS-A", "ANDINA-B", "BCI", "BSANTANDER", "CAP"];
+    const selectedID= event.data.name;
+
+  if (validIDs.includes(selectedID)) {
+    store.setGlobalID(selectedID);
+  } else {
+    store.setGlobalID("IPSA");
+  }
+
+}
+
 </script>
 
 <template>
-    <div class="card">
+    <Divider class="divider" />
+    <div class="card" style="margin-top: 1rem;">
         <DataTable :value="constituents" sortMode="multiple" tableStyle="min-width: 50rem" scrollable
-            scrollHeight="400px">
+            scrollHeight="400px" @row-click="clickOnRow">
             <Column field="name" header="Nombre" sortable style="width: 22%"></Column>
             <Column field="lastPrice" header="Último" sortable style="width: 13%"></Column>
             <Column field="volumeMoneyMM" header="Monto(MM)" sortable style="width: 13%"></Column>
